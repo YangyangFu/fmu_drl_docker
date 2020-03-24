@@ -8,7 +8,7 @@ exec docker run \
 	  -v `pwd`:/mnt/shared \
 	  -i \
       -t \
-	  yangyangfu/gym_only_py3 /bin/bash -c "cd /mnt/shared && python /mnt/shared/test_gym.py"
+	  yangyangfu/gym_torch_py3 /bin/bash -c "cd /mnt/shared && python /mnt/shared/test_gym_torch.py"
 
 exit $
   

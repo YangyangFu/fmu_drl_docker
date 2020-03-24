@@ -1,4 +1,4 @@
-IMA_NAME = yangyangfu/gym_only_py3
+IMA_NAME = yangyangfu/gym_torch_py3
 
 COMMAND_RUN = docker run \
 	  --name c1 \
@@ -16,9 +16,6 @@ build:
 
 remove_image:
 	docker rmi ${IMA_NAME}
-
-push:
-	docker push ${IMA_NAME}:latest
 
 Run:
 	${COMMAND_RUN} \
