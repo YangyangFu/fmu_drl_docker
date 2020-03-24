@@ -1,4 +1,4 @@
-IMA_NAME = gym_only
+IMA_NAME = gym_only_py2
 
 COMMAND_RUN = docker run \
 	  --name c1 \
