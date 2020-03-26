@@ -27,6 +27,14 @@ RUN pip install -Iv gym==0.15.3
 # no cuda
 RUN pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 
+## Install matplot
+RUN pip install matplotlib
+
 # entry point for gym
 ENTRYPOINT ["/usr/local/gym/bin/docker_entrypoint"]
 CMD ["pytest","--forked"]
+
+# Avoid warning that Matplotlib is building the font cache using fc-list. This may take a moment.
+# This needs to be towards the end of the script as the command writes data to
+# /home/developer/.cache
+RUN python -c "import matplotlib.pyplot"
