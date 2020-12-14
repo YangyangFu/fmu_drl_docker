@@ -1,6 +1,8 @@
+# inspired by https://github.com/anibali/docker-pytorch
+
 #DOCKER_ORG = yangyangfu
 DOCKER_ORG = $(shell docker info 2>/dev/null | sed '/Username:/!d;s/.* //')
-IMA_NAME = pytorch
+IMA_NAME = modelica
 DOCKER_FULL_NAME = $(DOCKER_ORG)/$(IMA_NAME)
 
 ifeq ("$(DOCKER_ORG)","")
@@ -11,11 +13,12 @@ endif
 PYTORCH_VERSION = 1.5.0
 CUDA_VERSION = 10.2
 BASE_RUNTIME = ubuntu:18.04
+GYM_VERSION = 0.15.3
 
 PYTHON_VERSION = 3.8
 
 #DOCKER_TAG = $(CUDA_VERSION)-cudnn$(CUDNN_VERSION)-$(BASE_RUNTIME)
-DOCKER_TAG = $(PYTORCH_VERSION)-cuda$(CUDA_VERSION)
+DOCKER_TAG = torch$(PYTORCH_VERSION)-cuda$(CUDA_VERSION)-gym$(GYM_VERSION)
 
 COMMAND_RUN = docker run \
 	  --name c1 \
@@ -29,8 +32,8 @@ COMMAND_RUN = docker run \
 	  ${DOCKER_FULL_NAME}:${DOCKER_TAG} /bin/bash -c
 
 build:
-	docker build --no-cache --rm -t ${DOCKER_FULL_NAME}:${DOCKER_TAG} .
-
+	#docker build --no-cache --rm -t ${DOCKER_FULL_NAME}:${DOCKER_TAG} .
+	docker build --no-cache --rm -t ${DOCKER_FULL_NAME} .
 remove_image:
 	docker rmi ${DOCKER_FULL_NAME}:${DOCKER_TAG}
 
