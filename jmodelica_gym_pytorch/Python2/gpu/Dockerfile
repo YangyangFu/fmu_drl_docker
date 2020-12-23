@@ -1,5 +1,5 @@
-# A Dockerfile that sets up a full Gym install with test dependencies
-FROM michaelwetter/ubuntu-1804_jmodelica_trunk
+FROM yangyangfu/jmodelica_py2_gym
+LABEL maintainer yangyangfu(yangyang.fu@tamu.edu)
 
 ## add cuda
 USER root
@@ -41,20 +41,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcudnn8-dev=$CUDNN_VERSION-1+cuda10.1 \
     && apt-mark hold libcudnn8 && \
     rm -rf /var/lib/apt/lists/*
-
 # Install pytorch=1.4.0, which is the lastest version that supports python 2
-# cuda 10.2
-#RUN pip install torch==1.4.0 torchvision==0.5.0
-# CUDA 10.1
-RUN pip install torch==1.7.1+cu101 torchvision==0.8.2+cu101 torchaudio==0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
-## Install matplot
-# RUN pip install matplotlib
+# add cuda 10.1 supported pytorch
+RUN pip install torch==1.4.0 torchvision==0.5.0
 
-# entry point for gym
-ENTRYPOINT ["/usr/local/gym/bin/docker_entrypoint"]
-CMD ["pytest","--forked"]
-
-# Avoid warning that Matplotlib is building the font cache using fc-list. This may take a moment.
-# This needs to be towards the end of the script as the command writes data to
-# /home/developer/.cache
-RUN python -c "import matplotlib.pyplot"
+WORKDIR $HOME
