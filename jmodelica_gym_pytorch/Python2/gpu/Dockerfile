@@ -42,7 +42,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-mark hold libcudnn8 && \
     rm -rf /var/lib/apt/lists/*
 # Install pytorch=1.4.0, which is the lastest version that supports python 2
-# add cuda 10.1 supported pytorch
-RUN pip install torch==1.4.0 torchvision==0.5.0
+# add cuda 10.1 supported pytorch, and add --no-cache-dir to avoid large memory use
+RUN pip install --default-timeout=100 torch==1.4.0 torchvision==0.5.0  --no-cache-dir
 
 WORKDIR $HOME
