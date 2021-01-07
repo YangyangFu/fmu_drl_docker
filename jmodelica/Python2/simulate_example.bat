@@ -7,4 +7,4 @@ docker run --name test^
 	  -v %CD%:/mnt/shared^
 	  -i^
       -t^
-	  yangyangfu/jmodelica_py2:base /bin/bash -c "cd /mnt/shared && python /mnt/shared/simulate_example.py"
+	  yangyangfu/jmodelica_py2 /bin/bash -c "cd /mnt/shared && python /mnt/shared/simulate_example.py"
