@@ -1,5 +1,5 @@
 IMA_NAME = yangyangfu/jmodelica_py2
-TAG = lastest
+TAG = latest
 
 build:
 	docker build --no-cache --rm -t ${IMA_NAME}:${TAG} .

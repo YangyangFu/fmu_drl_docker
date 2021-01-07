@@ -70,6 +70,11 @@ if is_ipython:
 plt.ion()
 
 # if gpu is to be used
+if torch.cuda.is_available():
+    print 'cuda is available'
+else:
+    print 'cuda is not available'
+    
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 

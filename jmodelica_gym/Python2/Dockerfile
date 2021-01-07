@@ -1,4 +1,4 @@
-FROM yangyangfu/jmodelica_py2:base
+FROM yangyangfu/jmodelica_py2
 LABEL maintainer yangyangfu(yangyang.fu@tamu.edu)
 
 # A Dockerfile that sets up a full Gym install with test dependencies

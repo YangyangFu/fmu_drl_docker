@@ -8,4 +8,4 @@ remove_image:
 	docker rmi ${IMA_NAME}:${TAG}
 
 push:
-	docker push ${IMG_NAME}:${TAG}
+	docker push ${IMA_NAME}:${TAG}
