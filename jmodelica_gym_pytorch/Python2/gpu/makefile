@@ -12,4 +12,4 @@ tag:
 	docker image tag ${IMA_NAME} ${IMA_NAME}:${VERSION}
 
 push:
-	docker push ${IMA_NAME}:${VERSION}
+	docker image push ${IMA_NAME}:${VERSION}
