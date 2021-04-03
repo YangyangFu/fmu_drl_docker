@@ -274,7 +274,8 @@ class DymolaCSCartPoleEnv(CartPoleEnv, FMI1CSEnv):
             'initial_state': (0, 0, 85 / 180 * math.pi, 0),
             'time_step': time_step,
             'positive_reward': positive_reward,
-            'negative_reward': negative_reward
+            'negative_reward': negative_reward,
+            'filter': True,
         }
         # loads FMU corresponding to the Modelica type required
         super(DymolaCSCartPoleEnv,self).__init__("../resources/dymola/linux/ModelicaGym_CartPole.fmu",
