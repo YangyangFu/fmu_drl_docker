@@ -13,7 +13,10 @@ config = {
     'positive_reward': 1,
     'negative_reward': -100,
     'force': 15,
-    'log_level': logging.INFO
+    'log_level': logging.INFO,
+    'fmu_result_handling':'memory',
+    'fmu_result_ncp':100,
+    'filter_flag':True
 }
 
 register(

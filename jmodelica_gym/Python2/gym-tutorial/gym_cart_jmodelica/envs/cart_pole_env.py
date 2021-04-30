@@ -197,7 +197,10 @@ class JModelicaCSCartPoleEnv(CartPoleEnv, FMI2CSEnv):
                  positive_reward,
                  negative_reward,
                  force,
-                 log_level):
+                 log_level,
+                 fmu_result_handling='memory',
+                 fmu_result_ncp=100.,
+                 filter_flag=False):
 
         logger.setLevel(log_level)
 
@@ -218,66 +221,11 @@ class JModelicaCSCartPoleEnv(CartPoleEnv, FMI2CSEnv):
             'initial_state': (0, 0, 85 / 180 * math.pi, 0),
             'time_step': time_step,
             'positive_reward': positive_reward,
-            'negative_reward': negative_reward
+            'negative_reward': negative_reward,
+            'fmu_result_handling':fmu_result_handling,
+            'fmu_result_ncp':fmu_result_ncp,
+            'filter_flag':filter_flag
         }
         super(JModelicaCSCartPoleEnv,self).__init__("./ModelicaGym_CartPole.fmu",
                          config, log_level)
        # location of fmu is set to current working directory
-
-
-class DymolaCSCartPoleEnv(CartPoleEnv, FMI1CSEnv):
-    """
-    Wrapper class for creation of cart-pole environment using Dymola-compiled FMU (FMI standard v.1.0).
-
-    Attributes:
-        m_cart (float): mass of a cart.
-
-        m_pole (float): mass of a pole.
-
-        phi1_start (float): angle of the pole, when experiment starts.
-        It is counted from the positive direction of X-axis. Specified in radians.
-        1/2*pi means pole standing straight on the cast.
-
-        w1_start (float): angle speed of the poles mass center. I.e. how fast pole angle is changing.
-        time_step (float): time difference between simulation steps.
-        positive_reward (int): positive reward for RL agent.
-        negative_reward (int): negative reward for RL agent.
-    """
-
-    def __init__(self,
-                 m_cart,
-                 m_pole,
-                 phi1_start,
-                 w1_start,
-                 time_step,
-                 positive_reward,
-                 negative_reward,
-                 force,
-                 log_level):
-
-        logger.setLevel(log_level)
-
-        self.force = force
-        self.theta_threshold = TWELVE_DEGREES_IN_RAD
-        self.x_threshold = 2.4
-
-        self.viewer = None
-        self.display = None
-        self.pole_transform = None
-        self.cart_transform = None
-
-        config = {
-            'model_input_names': ['u'],
-            'model_output_names': ['s', 'v', 'phi1', 'w'],
-            'model_parameters': {'m_trolley': m_cart, 'm_load': m_pole,
-                                 'phi1_start': phi1_start, 'w1_start': w1_start},
-            'initial_state': (0, 0, 85 / 180 * math.pi, 0),
-            'time_step': time_step,
-            'positive_reward': positive_reward,
-            'negative_reward': negative_reward,
-            'filter': True,
-        }
-        # loads FMU corresponding to the Modelica type required
-        super(DymolaCSCartPoleEnv,self).__init__("../resources/dymola/linux/ModelicaGym_CartPole.fmu",
-                         config, log_level)
-
