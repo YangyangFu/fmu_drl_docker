@@ -7,4 +7,5 @@ USER root
 # no cuda
 RUN pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 
+USER developer
 WORKDIR $HOME

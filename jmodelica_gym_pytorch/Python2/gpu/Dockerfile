@@ -45,4 +45,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # add cuda 10.1 supported pytorch, and add --no-cache-dir to avoid large memory use
 RUN pip install --default-timeout=100 torch==1.4.0 torchvision==0.5.0  --no-cache-dir
 
+USER developer
 WORKDIR $HOME
