@@ -158,7 +158,10 @@ def run_ql_experiments(n_experiments=1,
         'positive_reward': positive_reward,
         'negative_reward': negative_reward,
         'force': force,
-        'log_level': log_level
+        'log_level': log_level,
+        'fmu_result_handling':'memory',
+        'fmu_result_ncp':100.,
+        'filter_flag':True
     }
 
 #    from gym.envs.registration import register
@@ -184,7 +187,10 @@ def run_ql_experiments(n_experiments=1,
         positive_reward=positive_reward,
         negative_reward=negative_reward,
         force=force,
-        log_level=log_level)
+        log_level=log_level,
+        fmu_result_handling='memory',
+        fmu_result_ncp=100.,
+        filter_flag=False)
         
     for i in range(n_experiments):
         trained_agent, episodes_length, exec_time = cart_pole_train_qlearning(env,
