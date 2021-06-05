@@ -1,5 +1,5 @@
+UBUNTU_VER = 18.04
 PYTHON_VER = 3
-
 IMA_NAME = yangyangfu/gym_modelica_py${PYTHON_VER}
 IMA_NAME_BASE = yangyangfu/gym_base_py${PYTHON_VER}
 
@@ -15,10 +15,10 @@ COMMAND_RUN = docker run \
 	  ${IMG_NAME} /bin/bash -c
 
 build:
-	docker build --build-arg PYTHON_VER=${PYTHON_VER} --no-cache --rm -t ${IMA_NAME} .
+	docker build --build-arg UBUNTU_VER=${UBUNTU_VER} --no-cache --rm -t ${IMA_NAME} .
 
 build_base:
-	docker build -f Dockerfile_base --build-arg PYTHON_VER=${PYTHON_VER} --no-cache --rm -t ${IMA_NAME_BASE} .
+	docker build -f Dockerfile_base --build-arg UBUNTU_VER=${UBUNTU_VER} --no-cache --rm -t ${IMA_NAME_BASE} .
 
 remove_image:
 	docker rmi ${IMA_NAME}

@@ -7,5 +7,5 @@ docker run^
 	  -v %CD%:/mnt/shared^
 	  -i^
       -t^
-	  yangyangfu/gym_modelica_py3 /bin/bash -c "cd /mnt/shared && python /mnt/shared/test_installation.py"
+	  yangyangfu/gym_modelica_py3 /bin/bash -c "cd /mnt/shared && python /mnt/shared/load_fmu.py"
 

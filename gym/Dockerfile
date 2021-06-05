@@ -1,43 +1,51 @@
 # A Dockerfile that sets up a full Gym install with test dependencies
-ARG PYTHON_VER
-FROM continuumio/miniconda$PYTHON_VER:latest
+ARG UBUNTU_VER 
+FROM ubuntu:${UBUNTU_VER}
 LABEL maintainer yangyangfu(yangyang.fu@tamu.edu)
 
-##################################################
-# Avoid warnings
-# debconf: unable to initialize frontend: Dialog
-# debconf: (TERM is not set, so the dialog frontend is not usable.)
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+# Install miniconda - this is from 
+# https://github.com/ContinuumIO/docker-images/blob/master/miniconda3/debian/Dockerfile
+# =================================
+# hadolint ignore=DL3008
+RUN apt-get update -q && \
+    apt-get install -q -y --no-install-recommends \
+        bzip2 \
+        ca-certificates \
+        git \
+        libglib2.0-0 \
+        libsm6 \
+        libxext6 \
+        libxrender1 \
+        mercurial \
+        subversion \
+        wget \
+        libgfortran3 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install required packages
-RUN apt-get update && \
-    apt-get install -y \
-    ant=1.10.5-3~18.04 \
-    autoconf=2.69-11 \
-    cmake=3.10.2-1ubuntu2.18.04.1 \
-    cython=0.26.1-0.4 \
-    g++=4:7.4.* \
-    gfortran=4:7.4.0-1ubuntu2.3 \
-    libgfortran3 \
-    ipython=5.5.0-1 \
-    libboost-dev=1.65.1.0ubuntu1 \
-    openjdk-8-jdk=8u222-b10-1ubuntu1~18.04.1 \
-    pkg-config=0.29.1-0ubuntu2 \
-    python-matplotlib \
-    subversion=1.9.7-4ubuntu1 \
-    swig=3.0.12-1 \
-    wget=1.19.4-1ubuntu2.2 \
-    zlib1g-dev=1:1.2.11.dfsg-0ubuntu2 \
-    git && \
-    rm -rf /var/lib/apt/lists/*
+ENV PATH /opt/conda/bin:$PATH
 
-# minimal installation of opengym
-# easy install: this is the version that can render on MacOS through docker python 2
-#RUN pip install -Iv gym==0.15.3
-RUN pip install gym
+# Leave these args here to better use the Docker build cache
+ARG CONDA_VERSION=py38_4.9.2
+ARG CONDA_MD5=122c8c9beb51e124ab32a0fa6426c656
 
-# copy bin to docker for entrypoint
-COPY ./bin /usr/local/gym/bin
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh -O miniconda.sh && \
+    echo "${CONDA_MD5}  miniconda.sh" > miniconda.md5 && \
+    if ! md5sum --status -c miniconda.md5; then exit 1; fi && \
+    mkdir -p /opt && \
+    sh miniconda.sh -b -p /opt/conda && \
+    rm miniconda.sh miniconda.md5 && \
+    ln -s /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh && \
+    echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc && \
+    echo "conda activate base" >> ~/.bashrc && \
+    find /opt/conda/ -follow -type f -name '*.a' -delete && \
+    find /opt/conda/ -follow -type f -name '*.js.map' -delete && \
+    /opt/conda/bin/conda clean -afy
+
+# create a conda environment install pyfmi for load fmu and gym for opengym environment
+RUN conda update conda && \
+    conda config --add channels conda-forge && \
+    conda install pyfmi pip gym
 
 # define users
 # Replace 1000 with your user / group id
@@ -65,17 +73,7 @@ RUN ls ./github/Tutorials -l
 RUN cd $HOME/github/Tutorials && pip install -e .
 WORKDIR $HOME
 
-# install pyfmi for load fmu
-RUN conda config --add channels conda-forge && \
-    conda install pyfmi
-
 # change user
 USER developer
 
-# Avoid warning that Matplotlib is building the font cache using fc-list. This may take a moment.
-# This needs to be towards the end of the script as the command writes data to
-# /home/developer/.cache
-RUN python -c "import matplotlib.pyplot"
-
-# entry point for gym
-ENTRYPOINT ["/usr/local/gym/bin/docker_entrypoint"]
+CMD [ "/bin/bash" ]
