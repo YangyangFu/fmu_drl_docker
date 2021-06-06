@@ -48,6 +48,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}
 RUN conda update conda && \
     conda config --add channels conda-forge && \
     conda install numpy=1.17.5 \
+        matplotlib \
         pip \
         gym \
         pyfmi 
@@ -80,5 +81,10 @@ WORKDIR $HOME
 
 # change user
 USER developer
+
+# Avoid warning that Matplotlib is building the font cache using fc-list. This may take a moment.
+# This needs to be towards the end of the script as the command writes data to
+# /home/developer/.cache
+RUN python -c "import matplotlib.pyplot"
 
 CMD [ "/bin/bash" ]
