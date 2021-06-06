@@ -7,7 +7,6 @@ exec docker run \
 	  -v `pwd`:/mnt/shared \
 	  -i \
       -t \
-	  yangyangfu/jmodelica_py2_gym /bin/bash -c "cd /mnt/shared && python /mnt/shared/test_cart_pole_q_learner.py"
-      
+	  yangyangfu/modelicagym_py3 /bin/bash -c "cd /mnt/shared && python /mnt/shared/load_fmu.py"
+
 exit $
-  

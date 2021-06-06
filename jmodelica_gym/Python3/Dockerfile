@@ -1,4 +1,4 @@
-# A Dockerfile that sets up a full Gym install with test dependencies
+# A Dockerfile that sets up a modelicagym environment - no jModleica is installed due to its imcompitability to python 3
 ARG UBUNTU_VER 
 FROM ubuntu:${UBUNTU_VER}
 LABEL maintainer yangyangfu(yangyang.fu@tamu.edu)
@@ -43,9 +43,14 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}
     /opt/conda/bin/conda clean -afy
 
 # create a conda environment install pyfmi for load fmu and gym for opengym environment
+# numpy has to be <=1.17 for a succesful run of fmu. 
+# see https://github.com/DigitalSlideArchive/HistomicsTK/issues/880.
 RUN conda update conda && \
     conda config --add channels conda-forge && \
-    conda install pyfmi pip gym
+    conda install numpy=1.17.5 \
+        pip \
+        gym \
+        pyfmi 
 
 # define users
 # Replace 1000 with your user / group id

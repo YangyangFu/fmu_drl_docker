@@ -7,6 +7,6 @@ exec docker run \
 	  -v `pwd`:/mnt/shared \
 	  -i \
       -t \
-	  yangyangfu/gym_modelica_py3 /bin/bash -c "cd /mnt/shared && python /mnt/shared/test_installation.py"
+	  yangyangfu/modelicagym_py3 /bin/bash -c "cd /mnt/shared && python /mnt/shared/test_installation.py"
 
 exit $
