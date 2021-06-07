@@ -7,6 +7,6 @@ exec docker run \
 	  -v `pwd`:/mnt/shared \
 	  -i \
       -t \
-	  conda_test /bin/bash -c "source activate py37 && cd /mnt/shared && python /mnt/shared/load_fmu.py"
+	  yangyangfu/jmodelica_py3 /bin/bash -c "source activate base && cd /mnt/shared && python /mnt/shared/load_fmu.py"
 
 exit $

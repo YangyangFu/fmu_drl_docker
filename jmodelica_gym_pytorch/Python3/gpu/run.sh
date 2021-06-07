@@ -8,6 +8,6 @@ exec docker run \
 	  -i \
       -t \
 	  yangyangfu/modelicagym_py3_pytorch_gpu /bin/bash -c "cd /mnt/shared && python /mnt/shared/test_torch.py"
-      
+	     
 exit $
   

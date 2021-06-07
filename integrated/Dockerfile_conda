@@ -1,8 +1,0 @@
-FROM continuumio/miniconda3
-WORKDIR /usr/src/app
-COPY ./ ./
-RUN conda create --name py37 python=3.7
-
-# Make RUN commands use the new environment:
-SHELL ["conda", "run", "-n", "py37", "/bin/bash", "-c"]
-
