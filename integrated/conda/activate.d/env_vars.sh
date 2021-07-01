@@ -1,0 +1,1 @@
+export PYFMI_PY3_CONDA_PATH="/opt/conda/lib/python3.8/site-packages"

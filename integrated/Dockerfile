@@ -25,8 +25,8 @@ RUN apt-get update -q && \
 ENV PATH /opt/conda/bin:$PATH
 
 # Leave these args here to better use the Docker build cache
-ARG CONDA_VERSION=py37_4.9.2
-ARG CONDA_MD5=3143b1116f2d466d9325c206b7de88f7
+ARG CONDA_VERSION=py38_4.9.2
+ARG CONDA_MD5=122c8c9beb51e124ab32a0fa6426c656
 
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh -O miniconda.sh && \
     echo "${CONDA_MD5}  miniconda.sh" > miniconda.md5 && \
@@ -41,11 +41,21 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}
     find /opt/conda/ -follow -type f -name '*.js.map' -delete && \
     /opt/conda/bin/conda clean -afy
 
-# create a conda environment install pyfmi for load fmu and gym for opengym environment
+# create a conda base envrionment for pyfmi
+# copy pyfmi python3 environment path to conda env
+COPY conda /opt/conda/etc/conda
+
+# create a conda environment install pyfmi for load fmu 
 # numpy has to be <=1.17 for a succesful run of fmu. 
 # see https://github.com/DigitalSlideArchive/HistomicsTK/issues/880.
 RUN conda update conda && \
     conda config --add channels conda-forge && \
-    conda install gym
+    conda install pyfmi 
+# There will be two pyfmi in this dockerfile. One is for python2 and the other is for python3.
+# need scecify different pyfmi when call different pythons
+# activate pyfmi for conda python 3
+#ENV PYTHONPATH /opt/conda/lib/python3.8/site-packages:$PYTHONPATH
+
+USER developer
 
 CMD [ "/bin/bash" ]

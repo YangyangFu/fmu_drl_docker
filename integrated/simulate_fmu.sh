@@ -7,6 +7,6 @@ exec docker run \
 	  -v `pwd`:/mnt/shared \
 	  -i \
       -t \
-	  yangyangfu/jmodelica_py3 /bin/bash -c "source activate base && cd /mnt/shared && python /mnt/shared/load_fmu.py"
-
+	  yangyangfu/jmodelica_py3 /bin/bash -c \
+	  "source activate base && export PYTHONPATH=$PYFMI_PY3_CONDA_PATH:$PYTHONPATH && cd /mnt/shared && python /mnt/shared/simulate_fmu.py"
 exit $
