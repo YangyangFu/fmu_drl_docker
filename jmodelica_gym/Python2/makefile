@@ -2,7 +2,6 @@ IMA_NAME = yangyangfu/jmodelica_py2_gym
 IMA_NAME_BASE = yangyangfu/jmodelica_py2_gym_base
 
 COMMAND_RUN = docker run \
-	  --name c1 \
 	  --detach=false \
 	  -e DISPLAY=${DISPLAY} \
 	  -v /tmp/.X11-unix:/tmp/.X11-unix \
