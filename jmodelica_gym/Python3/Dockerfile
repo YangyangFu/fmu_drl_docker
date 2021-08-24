@@ -19,7 +19,7 @@ RUN apt-get update -q && \
         mercurial \
         subversion \
         wget \
-        libgfortran3 \
+        libgfortran4 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -43,11 +43,10 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}
     /opt/conda/bin/conda clean -afy
 
 # create a conda environment install pyfmi for load fmu and gym for opengym environment
-# numpy has to be <=1.17 for a succesful run of fmu. 
 # see https://github.com/DigitalSlideArchive/HistomicsTK/issues/880.
 RUN conda update conda && \
     conda config --add channels conda-forge && \
-    conda install numpy=1.17.5 \
+    conda install numpy \
         matplotlib \
         pip \
         gym \
