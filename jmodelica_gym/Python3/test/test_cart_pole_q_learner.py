@@ -298,7 +298,7 @@ def reward_ratio_experiment(rws):
                                          positive_reward=pos_rew,
                                          negative_reward=neg_rew,
                                          force=15,
-                                         log_level=logging.INFO)
+                                         log_level=1)
 
 
 if __name__ == "__main__":
