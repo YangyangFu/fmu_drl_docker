@@ -46,8 +46,6 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}
 COPY conda /opt/conda/etc/conda
 
 # create a conda environment install pyfmi for load fmu 
-# numpy has to be <=1.17 for a succesful run of fmu. 
-# see https://github.com/DigitalSlideArchive/HistomicsTK/issues/880.
 RUN conda update conda && \
     conda config --add channels conda-forge && \
     conda install pyfmi 
