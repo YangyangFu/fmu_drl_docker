@@ -7,5 +7,5 @@
 	  -v `pwd`:/mnt/shared \
 	  -i \
       -t \
-	  yangyangfu/jmodelica_py2 /bin/bash -c "cd /mnt/shared && python /mnt/shared/compile_fmu.py"
+	  yangyangfu/jmodelica_gym_py3 /bin/bash -c "cd /mnt/shared && python2 /mnt/shared/compile_fmu.py"
     exit $
