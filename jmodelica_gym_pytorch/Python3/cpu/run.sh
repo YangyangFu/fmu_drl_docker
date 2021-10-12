@@ -7,4 +7,4 @@ docker run \
 	-v `pwd`:/mnt/shared \
 	-i \
 	-t \
-	yangyangfu/jmodelica_py3_gym_pytorch_cpu /bin/bash -c "cd /mnt/shared && python /mnt/shared/test_torch.py"
+	yangyangfu/jmodelica_py3_gym_pytorch:cpu /bin/bash -c "cd /mnt/shared && python /mnt/shared/test_torch.py"

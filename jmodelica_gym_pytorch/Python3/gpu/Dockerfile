@@ -1,4 +1,4 @@
-FROM yangyangfu/modelicagym_py3
+FROM yangyangfu/jmodelica_py3_gym
 LABEL maintainer yangyangfu(yangyang.fu@tamu.edu)
 
 ## add cuda
