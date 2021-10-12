@@ -7,6 +7,7 @@ exec docker run \
 	  -v `pwd`:/mnt/shared \
 	  -i \
       -t \
-	  yangyangfu/modelicagym_py3 /bin/bash -c "cd /mnt/shared && python /mnt/shared/test_installation.py"
+	  yangyangfu/jmodelica_py3_gym /bin/bash -c \
+	  "source activate base && export PYTHONPATH=$PYFMI_PY3_CONDA_PATH:$PYTHONPATH && cd /mnt/shared && python /mnt/shared/test_installation.py"
 
 exit $
