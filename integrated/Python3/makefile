@@ -1,4 +1,4 @@
-IMA_NAME = yangyangfu/jmodelica_gym_py3
+IMA_NAME = yangyangfu/jmodelica_drl
 TAG = latest
 
 # This is not very important
