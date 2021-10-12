@@ -7,4 +7,4 @@ docker run^
 	-v %CD%:/mnt/shared^
 	-i^
 	-t^
-	yangyangfu/modelicagym_py3_pytorch_cpu /bin/bash -c "cd /mnt/shared && python /mnt/shared/test_torch.py"
+	yangyangfu/jmodelica_py3_gym_pytorch_cpu /bin/bash -c "cd /mnt/shared && python /mnt/shared/test_torch.py"

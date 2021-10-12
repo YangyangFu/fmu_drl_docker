@@ -1,5 +1,5 @@
-IMA_NAME = yangyangfu/modelicagym_py3_pytorch_cpu
-TAG = latest
+IMA_NAME = yangyangfu/jmodelica_py3_gym_pytorch
+TAG = cpu
 
 build:
 	docker build --no-cache --rm -t ${IMA_NAME}:${TAG} .
