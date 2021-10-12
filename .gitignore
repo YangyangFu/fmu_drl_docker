@@ -8,3 +8,12 @@
 
 ###########################
 *.obj
+
+#########################
+# Modelica and FMU files
+*.txt
+*.mat
+
+##############
+# Tutorial Results
+experiments_results
