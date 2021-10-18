@@ -20,4 +20,13 @@ Here the docker environment is assumed to be executable on your local computer.
 
 You should be able to go.
 
-
+# Cite
+If you find this framework helps your research, please consider to cite:
+```
+Yangyang Fu, Shichao Xu, Qi Zhu, and Zheng O’Neill. 2021. Containerized
+Framework for Building Control Performance Comparisons:
+Model Predictive Control vs Deep Reinforcement Learning
+Control. In Proceedings of The 8th ACM International Conference
+on Systems for Energy-Efficient Buildings, Cities, and Transportation
+(BuildSys), Nov 17-18, 2021, Coimbra, Portugal. ACM, New York, NY,
+USA, 5 pages. https://doi.org/10.1145/3486611.3492412.
