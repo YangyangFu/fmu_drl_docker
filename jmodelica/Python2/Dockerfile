@@ -1,4 +1,4 @@
-# A jmodelica docker image hosted by michael wetter
+# A jmodelica docker image hosted by michael wetter: https://github.com/lbl-srg/docker-ubuntu-jmodelica/blob/master/Dockerfile
 FROM michaelwetter/ubuntu-1804_jmodelica_trunk
 # Run a command to find JModelica installation location 
 #find / -xdev 2>/dev/null -name "JModelica"
