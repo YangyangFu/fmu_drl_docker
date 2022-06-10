@@ -118,7 +118,7 @@ To run the experiment, type:
 
 
 # Cite
-If you find this framework helps your research, please consider to cite:
+If you find this framework is a help to your research, please consider to cite:
 ```
 Yangyang Fu, Shichao Xu, Qi Zhu, and Zheng O’Neill. 2021. Containerized
 Framework for Building Control Performance Comparisons:
