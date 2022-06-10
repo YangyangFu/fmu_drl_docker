@@ -4,9 +4,17 @@
 # docker_gym_pytorch_jmodelica
 Docker file for OpenAI gym, pyTorch and jModelica. This is the virtual environment for deep reinforcement learning control on a Modelica/EnergyPlus environment.
 
-# How to use
-Here the docker environment is assumed to be executable on your local computer.
+# Description
+This is a set of environments that support jModelica based deep reinforcement learning environment. 
+The environments are divided into smaller environment following object-oriented syntax to support flexible customization.
+Note now only Python 3 is supported.
 
+Folder structure:
+ - `jmodelica`: This folder contain source files for building jModelica in Python 3 from scratch, and examples for how to use.
+ - `jmodelica_drl`: This folder contain source files for building jModelica-based deep reinforcment learning environment from scratch, and examples for how to use.
+   
+# Run Example
+Here the docker environment is assumed to be executable on your local computer.
 
 1. open a terminal and navigate to your work directory. For example, if we want to test the integrated enviroment of OpenGym, Pytorch and JModelica, we should direct to `your\folder\gym_python_jmodelica/Python2`
 
@@ -19,6 +27,9 @@ Here the docker environment is assumed to be executable on your local computer.
       `bash run.sh`
 
 You should be able to go.
+
+# How to Customize the Environment
+
 
 # Cite
 If you find this framework helps your research, please consider to cite:
