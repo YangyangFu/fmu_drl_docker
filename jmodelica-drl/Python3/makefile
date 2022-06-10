@@ -18,13 +18,13 @@ build_cpu:
 	docker build -f ${DOCKERFILE_CPU} --no-cache --rm -t ${IMAGE_NAME_CPU} .
 
 build_gpu:
-	docker build -f ${DOCKERFILE_GPU} --no-cache --rm -t ${IMAGE_NAME_GPU} .
+	docker build -f ${DOCKERFILE_GPU} --no-cache --rm -t ${IMGAE_NAME_GPU} .
 
 tag_cpu:
 	docker tag ${IMAGE_NAME_CPU} ${HOST}/${IMAGE_NAME_CPU}:latest
 
 tag_gpu:
-	docker tag ${IMAGE_NAME_GPU}:latest ${HOST}/${IMAGE_NAME_GPU}:latest
+	docker tag ${IMAGE_NAME_GPU} ${HOST}/${IMAGE_NAME_GPU}:latest
 
 push_cpu:
 	docker push ${HOST}/${IMAGE_NAME_CPU}:latest
