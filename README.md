@@ -1,7 +1,7 @@
 # FMU-DRL
 
 # 1. Description
-This is a set of environments that support FMU based deep reinforcement learning environment. 
+This is a set of environments that support FMU based deep reinforcement learning (DRL) environment. 
 The FMU can be generated from Dymola, jModelica and EnergyPlus.
 The environments are divided into smaller environment following object-oriented syntax to support flexible customization.
 Note now only Python 3 is supported, and only jModelica FMU is tested.
