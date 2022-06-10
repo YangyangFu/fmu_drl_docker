@@ -1,34 +1,111 @@
 # to-do
 1. update documentation by adding examples to customize building environment and customize DRL/MPC formulations
 
-# docker_gym_pytorch_jmodelica
-Docker file for OpenAI gym, pyTorch and jModelica. This is the virtual environment for deep reinforcement learning control on a Modelica/EnergyPlus environment.
-
-# Description
+# 1. Description
 This is a set of environments that support jModelica based deep reinforcement learning environment. 
 The environments are divided into smaller environment following object-oriented syntax to support flexible customization.
 Note now only Python 3 is supported.
 
-Folder structure:
+**Folder Structure**:
  - `jmodelica`: This folder contain source files for building jModelica in Python 3 from scratch, and examples for how to use.
  - `jmodelica_drl`: This folder contain source files for building jModelica-based deep reinforcment learning environment from scratch, and examples for how to use.
-   
-# Run Example
+
+**Supported OS**:
+
+This environment supports all three major OS but with limitations:
+   - `Window OS`: Nvidia GPU cannot be called due to 
+   - `Mac OS `: Mac usually doesn't have Nvidia GPU
+   - `Linux`: works perfectly when Nvidia GPU is available
+
+# 2. Installation
+This documentation assumes the reader has necessary knowledge about how to use Docker.
+
+## 2.1 Install jModelica
+jModelica is supported in both Python 2 and Python 3, and the source file for building a docker on a local machine is located in `./jmodelica`.
+
+`If the user doesn't want to install everything from scratch`, one can directly pull the image I uploaded in the dockerhub by:
+```bash
+      docker pull yangyangfu/jmodelica_py3
+```
+The name can be changed freely by using `docker tag` command after pulling to the local.
+
+`If the user wants to build for fun`, we highly recommend the Python 3 version, and use it as an example here. To install jModelica in Python 3, direct to the subdirectory by
+
+```bash
+      cd ./jmodelica/Python3
+```
+
+Then call script to build the docker image locally by the following command, which executes the `build` command in the `makefile`, and run the docker building process.
+```bash
+      make build
+```
+
+If the reader wants a different name, please refer to `makefile`, and directly change the name before the build process.
+If the build is successful, the docker image will be named `yangyangfu/jmodelica_py3` by checking:
+```bash
+      docker image ls
+```
+
+This would list all the images in the local computer. 
+For how to test examples using jModelica, please refer to 3.2.
+
+## 2.2 Install jModelica-based DRL envrionment
+jModelica serves as a numerical environment, and the DRL algorithms need to be additionally installed.
+
+`If the user doesn't want to install everything from scratch`, one can directly pull the image I uploaded in the dockerhub by:
+```bash
+      docker pull yangyangfu/jmodelica_drl_cpu      -> for CPU-only version
+      docker pull yangyangfu/jmodelica_drl_gpu      -> for GPU version
+```
+
+`If the user wants to build for fun`, direct to the right folder by:
+```bash
+      cd ./jmodelica-drl/Python3
+```
+
+Build the docker image according to the availability of Nvidia GPU in your local computer OS by:
+```bash
+      make build_cpu
+```
+or 
+```bash
+      make build_gpu
+```
+
+A successful build would create a corressonding docker image in your local computer:
+   - `jmodelica_drl_cpu` for CPU build
+   - `jmodelica_drl_gpu` for GPU build
+
+Customized cuda version can be defined in `/jmodelica-drl/Python3/Dockerfile_GPU`.
+
+# 3. Test Examples
 Here the docker environment is assumed to be executable on your local computer.
 
-1. open a terminal and navigate to your work directory. For example, if we want to test the integrated enviroment of OpenGym, Pytorch and JModelica, we should direct to `your\folder\gym_python_jmodelica/Python2`
+## 3.1 Test jModelica installation
+1. open a terminal and navigate to your work directory, such as `jmodelica/Python3`
 
-2. build a local docker container from docker file. This steo uses the `Dockerfile` and `makefile` in the current directory.
+2. compile a Modelica file in `*.mo` into FMU using jModelica docker by running
 
-      `make build`
+```bash
+      bash compile_fmu.sh -> for MacOS or Linux
+      compile_fmu.bat     -> for windows OS
+```
 
-3. after a sucessful build, we can test the docker environment by running the given examples in `run.sh`. The bash file calls a python script, e.g., `test_gym_torch.py`. Running the bash file can be realized by typing:
+A successful compilation would generate a `*.fmu` file in the current folder.
 
-      `bash run.sh`
+3. simulate the generated fmu using pyFMI by typing:
+```bash
+      bash simulate_fmu.sh -> for MacOS or Linux
+      simulate_fmu.bat     -> for windows OS
+```
 
-You should be able to go.
+## 3.2 Test jModelica-based DRL installation
 
-# How to Customize the Environment
+TO-DO
+
+# 4. Use Cases
+
+## 4.1 How to Customize the Docker Environment?
 
 
 # Cite

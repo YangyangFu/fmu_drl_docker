@@ -1,0 +1,51 @@
+# This is a CPU version jModelica-based DRL environment
+FROM yangyangfu/jmodelica_py3
+LABEL Yangyang Fu (yangyang.fu@tamu.edu)
+
+# Install libgfortran for high-version pyfmi
+#RUN apt-get update -q && \
+#    apt-get install -q -y --no-install-recommends \
+#    libgfortran4 \
+#    && apt-get clean \
+#    && rm -rf /var/lib/apt/lists/*
+
+USER root
+
+### ====================================================================================
+## install necessary python deep reinforcement learning package
+# Downgrade setuptools for pytprch. This is a known bug which has been patched: https://github.com/pytorch/pytorch/pull/69904.
+#  - tianshou: DRL library
+
+RUN conda update conda && \
+    conda config --add channels conda-forge && \
+    conda install pip \
+    tianshou=0.4.5 \
+    matplotlib \
+    setuptools=59.1.1 && \
+    conda clean -ya
+
+#### ==================================================================
+#### install and test modelicagym
+# install modelicagym from source to support FMU-based opengym environment
+WORKDIR $HOME
+RUN git config --global url."https://github.com/".insteadOf git://github.com/ && \
+    pip install git+git://github.com/YangyangFu/modelicagym.git@master 
+
+# install a modelica-opengym example: pole cart tutorial 
+RUN mkdir github && cd github 
+COPY ./gym-tutorial/gym_cart_jmodelica $HOME/github/Tutorials/gym_cart_jmodelica
+COPY ./gym-tutorial/setup.py $HOME/github/Tutorials/setup.py
+RUN ls ./github/Tutorials -l
+RUN cd $HOME/github/Tutorials && pip install -e .
+WORKDIR $HOME
+
+# install pyhton opengl - not necessary if no render
+#RUN apt-get update && \
+#    apt-get install -y --no-install-recommends \
+#    python-opengl && \
+#    rm -rf /var/lib/apt/lists/*
+
+# change user
+USER developer
+
+CMD [ "/bin/bash" ]
