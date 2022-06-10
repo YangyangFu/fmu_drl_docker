@@ -1,10 +1,10 @@
-# to-do
-1. update documentation by adding examples to customize building environment and customize DRL/MPC formulations
+# FMU-DRL
 
 # 1. Description
-This is a set of environments that support jModelica based deep reinforcement learning environment. 
+This is a set of environments that support FMU based deep reinforcement learning environment. 
+The FMU can be generated from Dymola, jModelica and EnergyPlus.
 The environments are divided into smaller environment following object-oriented syntax to support flexible customization.
-Note now only Python 3 is supported.
+Note now only Python 3 is supported, and only jModelica FMU is tested.
 
 **Folder Structure**:
  - `jmodelica`: This folder contain source files for building jModelica in Python 3 from scratch, and examples for how to use.
@@ -100,12 +100,21 @@ A successful compilation would generate a `*.fmu` file in the current folder.
 ```
 
 ## 3.2 Test jModelica-based DRL installation
+Here we provide an example using pytorch-based DRL algorithms to control a cart-pole environment modelel in Modelica FMU.
+The opengym environment is implemented in `.jmodelica-drl/Python3/gym-tutorial`.
+The scripts that run the DRL experiment using DDQN are located at `.jmodelica-drl/Python3/test`.
 
-TO-DO
+To run the experiment, type:
+```bash
+      bash test_cart_pole_ddqn.sh         -> for MacOS or Linux
+      test_cart_pole_ddqn.bat             -> for Windows OS 
+```
 
 # 4. Use Cases
 
 ## 4.1 How to Customize the Docker Environment?
+
+## 4.2 How to Customize OpenGym Environment?
 
 
 # Cite
