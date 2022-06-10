@@ -7,5 +7,4 @@ docker run^
 	  -v %CD%:/mnt/shared^
 	  -i^
       -t^
-	  yangyangfu/jmodelica_drl /bin/bash -c^
-	  "source activate base && export PYTHONPATH=$PYFMI_PY3_CONDA_PATH:$PYTHONPATH && cd /mnt/shared && python /mnt/shared/test_installation.py"
+	  yangyangfu/jmodelica_drl_gpu /bin/bash -c "source activate base && export PYTHONPATH=$PYFMI_PY3_CONDA_PATH:$PYTHONPATH && cd /mnt/shared && python /mnt/shared/test_installation.py"
